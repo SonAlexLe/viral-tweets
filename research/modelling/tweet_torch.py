@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix
 
 import torch
 import wandb
@@ -28,14 +29,15 @@ features = [
 wandb.init(  # addtitional hyperparameters will be defined below
     config={
         "hf_checkpoint": "google/bert_uncased_L-2_H-128_A-2",
-        "freeze_bert": False,
+        "freeze_bert": True,
         "features": features,
         "early_stopping_patience": 3,
         "dropout": 0.2,
+        "max_length": 128,
         "dataset": "https://users.aalto.fi/~les1/all_tweets.json.xz"
     },
-    name="savedmodel-all-weighted-tinybert-unfreeze-6vars",
-    group="all-4labels",
+    name="no0retweets-128hdim-newclassifier-frozen",
+    group="all-3labels",
     entity="tweet_virality",
     save_code=True,
     project="ml-dev"
@@ -50,8 +52,8 @@ training_args = TrainingArguments(
     per_device_train_batch_size=128,           # batch size per device during training (smaller size for bigger models otherwise out of memory)
     per_device_eval_batch_size=128,            # batch size for evaluation
     warmup_steps=1000,                          # number of warmup steps for learning rate scheduler
-    learning_rate=5e-5,
-    weight_decay=1e-2,                         # strength of weight decay
+    learning_rate=1e-3,
+    weight_decay=1e-3,                         # strength of weight decay
     logging_steps=50,                          # logs after every x steps
     evaluation_strategy="epoch",               # when to evaluate
     save_strategy="epoch",                     # when to save
@@ -69,8 +71,9 @@ code.add_file("tweet_torch.py")
 wandb.run.log_artifact(code)
 
 df = pd.read_json(wandb.config.dataset, lines=True)
-df["label"] = pd.cut(df["retweets_count"], bins=[0,1,10,100,float("inf")], include_lowest=True, right=False)
-df["label"] = df["label"].cat.rename_categories([0,1,2,3])
+df = df.loc[df.retweets_count > 0, :]
+df["label"] = pd.cut(df["retweets_count"], bins=[1,10,100,float("inf")], include_lowest=True, right=False)
+df["label"] = df["label"].cat.rename_categories([0,1,2])
 
 splits = {}
 checkpoint = wandb.config.hf_checkpoint
@@ -80,7 +83,7 @@ splits["val"], splits["test"] = train_test_split(test_val, test_size=0.5, random
 
 
 class TweetDataset(torch.utils.data.Dataset):
-    def __init__(self, texts, labels, tokenizer, features=None):
+    def __init__(self, texts, labels, tokenizer, features=None, max_length=128):
         """
         Args:
             texts: list of tweet strings
@@ -88,6 +91,7 @@ class TweetDataset(torch.utils.data.Dataset):
             tokenizer: the tokenizer accomapnying the HF model
             features: pd.DataFrame of other features
         """
+        self.max_length = max_length
         self.texts = texts
         self.features = features.values.astype("int32") if features is not None else None
         self.labels = labels
@@ -99,7 +103,7 @@ class TweetDataset(torch.utils.data.Dataset):
             idx = idx.tolist()
         encodings = self.tokenizer(
             self.texts[idx],
-            max_length=128,
+            max_length=self.max_length,
             padding='max_length',
             truncation=True
         )
@@ -124,7 +128,8 @@ for split_name in splits.keys():
         texts=splits[split_name].tweet.to_list(),
         labels=splits[split_name].label.to_list(),
         tokenizer=tokenizer,
-        features=None if len(features) == 0 else splits[split_name][features]
+        features=None if len(features) == 0 else splits[split_name][features],
+        max_length=wandb.config.max_length
     )
 
 class ViralityClassifier(torch.nn.Module):
@@ -142,31 +147,15 @@ class ViralityClassifier(torch.nn.Module):
             self.freeze_bert()
 
         bert_hdim = self.bert.config.hidden_size
-        if n_features == 0:
-            n_features = n_labels
-            self.classifier = None
-        else:
-            # processes (downscaled) bert CLS outputs and other features
-            # input is a tensor where half of the dimensions are from BERT
-            # and the remaining half are the additional features
-            self.classifier = torch.nn.Sequential(
-                torch.nn.Linear(n_features*2, n_features),
-                torch.nn.ReLU(),
-                torch.nn.Linear(n_features, n_labels)
-            )
-
-        # reduces the hidden dimension 
-        # down to either the number of features
-        # or the number of classes if there are no features
-        self.bert_processor = torch.nn.Sequential(
-            torch.nn.Dropout(dropout),
-            torch.nn.Linear(bert_hdim, bert_hdim//3),
-            # torch.nn.ReLU(),
-            # torch.nn.Linear(bert_hdim//4, bert_hdim//8),
+        self.dropout = torch.nn.Dropout(dropout)
+        self.classifier = torch.nn.Sequential(
+	    torch.nn.Linear(bert_hdim+n_features, 32),
             torch.nn.ReLU(),
-            torch.nn.Linear(bert_hdim//3, n_features)
+            torch.nn.Linear(32, 16),
+            torch.nn.ReLU(),
+            torch.nn.Linear(16, n_labels)
         )
-    
+
     def forward(self, input_ids, token_type_ids, attention_mask, labels, features=None):
         """This method was coded with compatibility with HF Trainer API
         Basically, the args are ordered according to the items
@@ -178,9 +167,9 @@ class ViralityClassifier(torch.nn.Module):
             token_type_ids=token_type_ids
         )
         # takes the [CLS] output of BERT - can be interpreted as the summary of the sequence
-        logits = self.bert_processor(bert_outputs["last_hidden_state"][:, 0, :])
-        if self.classifier is not None:
-            logits = self.classifier(torch.cat([logits, features], dim=1))
+        seq_summary = bert_outputs["last_hidden_state"][:, 0, :]
+        seq_summary = self.dropout(seq_summary)
+        logits = self.classifier(torch.cat([seq_summary, features], dim=1))
 
         return transformers.modeling_outputs.SequenceClassifierOutput(
             loss=self.compute_loss(logits, labels),
@@ -215,7 +204,7 @@ def compute_metric(eval_pred):
 model = ViralityClassifier(
     checkpoint,
     n_features=len(features),
-    n_labels=4,
+    n_labels=3,
     freeze_bert=wandb.config.freeze_bert,
     dropout=wandb.config.dropout
 )
@@ -268,3 +257,38 @@ best_model_artifact = wandb.Artifact(
 best_ckpt = np.min([int(fol.split("-")[1]) for fol in os.listdir(f"./results/{wandb.run.name}")])
 best_model_artifact.add_dir(f"./results/{wandb.run.name}/checkpoint-{best_ckpt}")
 wandb.run.log_artifact(best_model_artifact)
+
+
+def evaluate(eval_set, features, model, tokenizer):
+    device = torch.device('cuda') if torch.cuda.is_available() else torch.device("cpu")
+    dset = TweetDataset(
+        texts=eval_set.tweet.to_list(),
+        labels=eval_set.label.to_list(),
+        tokenizer=tokenizer,
+        features=None if len(features) == 0 else eval_set[features],
+        max_length=wandb.config.max_length
+    )
+    val_loader = torch.utils.data.DataLoader(dset, batch_size=64)
+    losses = []
+    preds = []
+    with torch.no_grad():
+        for batch in val_loader:
+            for key, value in batch.items():
+                batch[key] = value.to(device)
+            outputs = model(**batch)
+            preds.extend(outputs.logits.argmax(dim=1).cpu().numpy().tolist()) 
+            losses.append(outputs.loss.item())
+    loss = np.mean(losses)
+    print("Mean loss: {:.4f}".format(loss))
+    acc = accuracy_score(eval_set.label.to_list(), preds)
+    print("Accuracy: {:.4f}".format(acc))
+    conf_mat = confusion_matrix(eval_set.label.to_list(), preds, normalize="true")  # C_ij = true class i, pred class j
+    print(conf_mat)
+    conf_df = pd.DataFrame(data=conf_mat)
+    conf_table = wandb.Table(dataframe=conf_df)
+    wandb.run.log({"confusion_matrix": conf_table})
+    wandb.run.summary["loss"] = loss
+    wandb.run.summary["best_accuracy"] = acc
+
+evaluate(splits["val"], features, model, tokenizer)
+
