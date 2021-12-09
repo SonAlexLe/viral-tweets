@@ -1,5 +1,5 @@
 # Pipeline implementation
-The source code of the pipeline is split into two parts, which are meant to be set up on two separate machines.
+The source code of the pipeline is split into two parts, which are meant to be set up on two separate machines.  
 The machines are using Python 3.9 and require the following packages: torch, mlflow, flask, transformers, tokenizers, pandas, sklearn, emoji, nltk, tqdm.
 
 ## Retraining machine
