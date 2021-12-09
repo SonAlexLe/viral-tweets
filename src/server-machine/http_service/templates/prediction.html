@@ -1,0 +1,6 @@
+<p>Model input data:</p><pre>{{ json_input }}</pre>
+<table>
+<tr><th>Prediction class</th><th>Probability</th></tr>
+<tr><td>= 0 likes</td><td>{{ "%.1f" % (predicted_classes[0] * 100) }}%</td></tr>
+<tr><td>&gt; 0 likes</td><td>{{ "%.1f" % (predicted_classes[1] * 100) }}%</td></tr>
+</table>
