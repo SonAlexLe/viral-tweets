@@ -1,5 +1,6 @@
 # Pipeline implementation
 The source code of the pipeline is split into two parts, which are meant to be set up on two separate machines.
+The machines are using Python 3.9 and require the following packages: torch, mlflow, flask, transformers, tokenizers, pandas, sklearn, emoji, nltk, tqdm.
 
 ## Retraining machine
 This part of the pipeline handles retraining. The core files of this part of the pipeline are `retrain_server.py` and `pytorch_models.py`.
