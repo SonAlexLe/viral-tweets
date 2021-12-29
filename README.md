@@ -16,7 +16,17 @@
 
 Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
 
-{:toc}
+## Table of contents
+
+* [Introduction](#introduction)
+* [Contributors](#contributors)
+* [Web application](#web-application)
+* [Data description](#data-description)
+* [Data collection](#data-collection)
+* [ML development](#ml-development)
+* [Pipeline development](#pipeline-development)
+* [References](#references)
+
 
 ## Introduction
 
@@ -26,7 +36,7 @@ Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
 
 * performing exploratory data analysis,
 
-* selecting a final ML model: BERT [2],
+* selecting a final ML model: BERT [2] (67% accuracy),
 
 * and deploying it on a set of host machines capable of continuously *fetching new tweets, retraining and redeploying the model if necessary*.
 
