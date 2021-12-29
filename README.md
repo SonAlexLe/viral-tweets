@@ -17,6 +17,7 @@
 Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
 
 ## Table of contents
+{:toc}
 
 * [Introduction](#introduction)
 * [Contributors](#contributors)
@@ -26,7 +27,6 @@ Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
 * [ML development](#ml-development)
 * [Pipeline development](#pipeline-development)
 * [References](#references)
-
 
 ## Introduction
 
