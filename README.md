@@ -1,13 +1,11 @@
 # Viral tweets MLOps project
 
+<p align="center">
 <figure>
-  <p align="center">
   <img src="docs/images/model_architecture_simplified.png">
-  </p>
-  <p align="center">
   <figcaption><i>Simplified model architecture.</i></figcaption>
-  </p>
 </figure>
+</p>
 
 <p align="center">
 <figure>
@@ -58,19 +56,35 @@ We had an agile and flexible development process.
 
 Since we did not deploy the web application of our project, we provide screenshots of it below.
 
-![](docs/images/empty_UI.png)
-*The main UI of the app.*
+<p align="center">
+<figure>
+  <img src="docs/images/empty_UI.png">
+  <figcaption><i>The main UI of the app.</i></figcaption>
+</figure>
+</p>
 
-![](docs/images/example_tweet_1.png)
-*An example tweet.*
+<p align="center">
+<figure>
+  <img src="docs/images/example_tweet_1.png">
+  <figcaption><i>An example tweet.</i></figcaption>
+</figure>
+</p>
 
-![](docs/images/example_results_1.png)
-*Inference results of the example tweet.*
+<p align="center">
+<figure>
+  <img src="docs/images/example_results_1.png">
+  <figcaption><i>Inference results of the example tweet.</i></figcaption>
+</figure>
+</p>
 
 ## Data description
 
-![](docs/images/features.png)
-*From raw tweets scraped with Twint, we engineered 10 features, including the main text.*
+<p align="center">
+<figure>
+  <img src="docs/images/features.png">
+  <figcaption><i>From raw tweets scraped with Twint, we engineered 10 features, including the main text.</i></figcaption>
+</figure>
+</p>
 
 The original training data included about 800 thousand tweets about Covid-19.
 There are either weak or almost nonexistent correlations between the above features.
@@ -90,11 +104,19 @@ Inspired by [1], We tried classical ML approaches such as Scikit-learn [5] model
 
 In the end, we got a working model in the form of a neural network based on the TinyBERT [7] variant of the BERT [2] language model.
 
-![](docs/images/model_architecture.png)
-*BERT-based model architecture.*
+<p align="center">
+<figure>
+  <img src="docs/images/model_architecture.png">
+  <figcaption><i>BERT-based model architecture.</i></figcaption>
+</figure>
+</p>
 
-![](docs/images/metrics.png)
-*Model evaluation metrics.*
+<p align="center">
+<figure>
+  <img src="docs/images/metrics.png">
+  <figcaption><i>Model evaluation metrics.</i></figcaption>
+</figure>
+</p>
 
 ## Pipeline development
 
@@ -107,8 +129,12 @@ in—tens of thousands of tweets—got us across the free tier limit. Second, we
 
 The team swiftly designed an alternative to AWS. We would use a similar architecture, but would deploy the pipeline on a set of hosts owned by one of the team members. This would free us from the financial constraints and allow for flexibility with respect to the way we would integrate the individual parts. In the end, we built a set of code scripts capable of running on any computer, given the environment has been properly set up. We leave to future work the adoption of these scripts to cloud environments.
 
-![](docs/images/pipeline_architecture.png)
-*Final pipeline architecture.*
+<p align="center">
+<figure>
+  <img src="docs/images/pipeline_architecture.png">
+  <figcaption><i>Final pipeline architecture.</i></figcaption>
+</figure>
+</p>
 
 The pipeline is meant to spread across three machines. Machine 1 hosts a Flask server with the main web application, the latest deployment of the model responsible for live inference, and an MLflow server for tracking metrics and models. Machine 2 is equipped with powerful GPUs and is responsible for data preprocessing, training, and training monitoring via the MLflow server. Machine 3 scrapes new tweets from the web and stores them.
 
