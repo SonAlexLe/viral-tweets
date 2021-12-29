@@ -1,5 +1,13 @@
 # Viral tweets MLOps project
 
+<figure>
+  <img
+  src="docs/images/model_architecture_simplified.png"
+    >
+  <figcaption>Simplified model architecture.</figcaption>
+</figure>
+
+
 ![](docs/images/model_architecture_simplified.png)
 *Simplified model architecture.*
 
@@ -28,7 +36,7 @@
 
 ## Contributors
 
-Agile and flexible development process.
+We had an agile and flexible development process.
 
 * Matthew (@Mallonbacka): continuous and fault-tolerant data scraping.
 
