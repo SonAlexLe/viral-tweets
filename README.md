@@ -16,6 +16,8 @@
 
 Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
 
+{:toc}
+
 ## Introduction
 
 * Machine learning (ML) pipeline for predicting the virality of Twitter posts, or tweets.
