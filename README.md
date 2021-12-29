@@ -38,6 +38,8 @@
 
 We had an agile and flexible development process.
 
+* Son (@SonAlexLe): helped the group navigate through the project; researched cloud options (GCP); wrote PyTorch scripts for data preprocessing and training BERT; coordinated model development with pipeline development.
+
 * Matthew (@Mallonbacka): continuous and fault-tolerant data scraping.
 
 * Pawel (@Taikelenn): researched cloud options (Azure); mainly implemented and integrated the pipeline components: data downloading, model (re)training, model (re)deployment.
@@ -49,8 +51,6 @@ We had an agile and flexible development process.
 * Hafsa (@salehi-Hafsa): EDA; researched ML models with Doc2Vec [3] text vectorization.
 
 * Binh (@pdtbinh): prototyped BERT code in TensorFlow; EDA; helped Long, Hafsa, and Son with their approaches.
-
-* Son (@SonAlexLe): helped the group navigate through the project; researched cloud options (GCP); wrote PyTorch scripts for data preprocessing and training BERT; coordinated model development with pipeline development.
 
 ## Web application
 
