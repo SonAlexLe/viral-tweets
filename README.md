@@ -1,9 +1,11 @@
 # Viral tweets MLOps project
 
 ![](src/images/model_architecture_simplified.png)
+
 *Simplified model architecture.*
 
 ![](src/images/pipeline_architecture.png)
+
 *MLOps pipeline architecture.*
 
 ## Introduction
