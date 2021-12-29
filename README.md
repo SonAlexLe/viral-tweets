@@ -3,6 +3,8 @@
 <figure>
   <p align="center">
   <img src="docs/images/model_architecture_simplified.png">
+  </p>
+  <p align="center">
   <figcaption><i>Simplified model architecture.</i></figcaption>
   </p>
 </figure>
