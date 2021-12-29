@@ -14,6 +14,8 @@
 </figure>
 </p>
 
+Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
+
 ## Introduction
 
 * Machine learning (ML) pipeline for predicting the virality of Twitter posts, or tweets.
@@ -30,9 +32,9 @@
 
 * Main goal: to learn the MLOps framework.
 
-* Instead of using ready made tools from cloud providers, we wrote code that can be set up on any machine.
+* Instead of using ready made tools from cloud providers, we write code that can be set up on any machine.
 
-* Key tools and libraries: PyTorch [4], Transfomrers [8] (model training); MLflow (model monitoring); Flask (deployment)
+* Key tools and libraries: PyTorch [4], Transformers [8] for model training; MLflow for model monitoring; Flask for model deployment and pipeline integration.
 
 ## Contributors
 
@@ -40,17 +42,17 @@ We had an agile and flexible development process.
 
 * Son (@SonAlexLe): helped the group navigate through the project; researched cloud options (GCP); wrote PyTorch scripts for data preprocessing and training BERT; coordinated model development with pipeline development.
 
-* Matthew (@Mallonbacka): continuous and fault-tolerant data scraping.
+* Matthew ([@Mallonbacka](https://github.com/Mallonbacka)): continuous and fault-tolerant data scraping.
 
-* Pawel (@Taikelenn): researched cloud options (Azure); mainly implemented and integrated the pipeline components: data downloading, model (re)training, model (re)deployment.
+* Pawel ([@Taikelenn](https://github.com/Taikelenn)): researched cloud options (Azure); mainly implemented and integrated the pipeline components: data downloading, model (re)training, model (re)deployment.
 
-* Sergey (@zakuraevs): researched cloud options (AWS); prototyped on AWS; researched pipeline components; drafted the pipeline.
+* Sergey ([@zakuraevs](https://github.com/zakuraevs)): researched cloud options (AWS); prototyped on AWS; researched pipeline components; drafted the pipeline.
 
-* Long (@normsie): exploratory data analysis (EDA); researched ML models with TF-IDF [6] text vectorization; tried BERT hyperparameter tuning.
+* Long ([@normsie](https://github.com/normsie)): exploratory data analysis (EDA); researched ML models with TF-IDF [6] text vectorization; tried BERT hyperparameter tuning.
 
-* Hafsa (@salehi-Hafsa): EDA; researched ML models with Doc2Vec [3] text vectorization.
+* Hafsa ([@salehi-Hafsa](https://github.com/salehi-Hafsa)): EDA; researched ML models with Doc2Vec [3] text vectorization.
 
-* Binh (@pdtbinh): prototyped BERT code in TensorFlow; EDA; helped Long, Hafsa, and Son with their approaches.
+* Binh ([@pdtbinh](https://github.com/pdtbinh)): prototyped BERT code in TensorFlow; EDA; helped Long, Hafsa, and Son with their approaches.
 
 ## Web application
 
