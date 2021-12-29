@@ -1,10 +1,8 @@
 # Viral tweets MLOps project
 
 <figure>
-  <img
-  src="docs/images/model_architecture_simplified.png"
-    >
-  <figcaption>Simplified model architecture.</figcaption>
+  <img src="docs/images/model_architecture_simplified.png">
+  <figcaption><i>Simplified model architecture.</i></figcaption>
 </figure>
 
 
