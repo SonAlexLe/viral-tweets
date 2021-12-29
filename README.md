@@ -1,18 +1,18 @@
 # Viral tweets MLOps project
 
-<p align="center">
 <figure>
+  <p align="center">
   <img src="docs/images/model_architecture_simplified.png">
   <figcaption><i>Simplified model architecture.</i></figcaption>
+  </p>
+</figure>
+
+<p align="center">
+<figure>
+  <img src="docs/images/pipeline_architecture.png">
+  <figcaption><i>MLOps pipeline architecture.</i></figcaption>
 </figure>
 </p>
-
-
-![](docs/images/model_architecture_simplified.png)
-*Simplified model architecture.*
-
-![](docs/images/pipeline_architecture.png)
-*MLOps pipeline architecture.*
 
 ## Introduction
 
