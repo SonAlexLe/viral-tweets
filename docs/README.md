@@ -3,15 +3,8 @@
 
 <p align="center">
 <figure>
-  <img src="images/model_architecture_simplified.png">
-  <figcaption><i>Simplified model architecture.</i></figcaption>
-</figure>
-</p>
-
-<p align="center">
-<figure>
-  <img src="images/pipeline_architecture.png">
-  <figcaption><i>MLOps pipeline architecture.</i></figcaption>
+  <img src="docs/images/architectures.png">
+  <figcaption><i>ML model and pipeline architectures.</i></figcaption>
 </figure>
 </p>
 
@@ -71,15 +64,8 @@ Since we did not deploy the web application of our project, we provide screensho
 
 <p align="center">
 <figure>
-  <img src="images/example_tweet_1.png">
-  <figcaption><i>An example tweet.</i></figcaption>
-</figure>
-</p>
-
-<p align="center">
-<figure>
-  <img src="images/example_results_1.png">
-  <figcaption><i>Inference results of the example tweet.</i></figcaption>
+  <img src="images/example_1.png">
+  <figcaption><i>Inference results of an example tweet.</i></figcaption>
 </figure>
 </p>
 
