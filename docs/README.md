@@ -10,6 +10,9 @@
 
 Forked from [the original repository](https://github.com/Mallonbacka/viral-tweets).
 
+## Table of contents
+{:.no_toc}
+
 * Table of contents (if viewed raw, click on the button on the left of "README.md")
 {:toc}
 
