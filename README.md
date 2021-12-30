@@ -16,7 +16,7 @@
 
 Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
 
-*test
+* test
 {:toc}
 
 ## Introduction
