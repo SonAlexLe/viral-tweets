@@ -1,4 +1,5 @@
 # Viral tweets MLOps project
+{:.no_toc}
 
 <p align="center">
 <figure>
@@ -16,7 +17,7 @@
 
 Forked from [the original repository](https://github.com/Mallonbacka/viral-tweets).
 
-* test
+* Table of contents (if viewed raw, click on the button on the left of "README.md")
 {:toc}
 
 ## Introduction
