@@ -16,18 +16,8 @@
 
 Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
 
-## Table of contents
-
 *test
 {:toc}
-<!-- * [Introduction](#introduction)
-* [Contributors](#contributors)
-* [Web application](#web-application)
-* [Data description](#data-description)
-* [Data collection](#data-collection)
-* [ML development](#ml-development)
-* [Pipeline development](#pipeline-development)
-* [References](#references) -->
 
 ## Introduction
 
