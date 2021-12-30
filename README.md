@@ -35,7 +35,7 @@ Please check out [our project documentation](https://sonalexle.github.io/viral-t
 
 We had an agile and flexible development process.
 
-* Son ([@SonAlexLe](https://github.com/SonAlexLe)): helped the group navigate through the project; researched cloud options (GCP); wrote PyTorch scripts for data preprocessing and training BERT; coordinated model development with pipeline development.
+* Son ([@sonalexle](https://github.com/sonalexle)): helped the group navigate through the project; researched cloud options (GCP); wrote PyTorch scripts for data preprocessing and training BERT; coordinated model development with pipeline development.
 
 * Matthew ([@Mallonbacka](https://github.com/Mallonbacka)): continuous and fault-tolerant data scraping.
 
