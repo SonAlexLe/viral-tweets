@@ -14,7 +14,7 @@
 </figure>
 </p>
 
-Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
+Forked from [the original repository](https://github.com/Mallonbacka/viral-tweets).
 
 * test
 {:toc}
