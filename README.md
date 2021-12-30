@@ -20,15 +20,14 @@ Forked from [the original repo](https://github.com/Mallonbacka/viral-tweets).
 
 *test
 {:toc}
-
-* [Introduction](#introduction)
+<!-- * [Introduction](#introduction)
 * [Contributors](#contributors)
 * [Web application](#web-application)
 * [Data description](#data-description)
 * [Data collection](#data-collection)
 * [ML development](#ml-development)
 * [Pipeline development](#pipeline-development)
-* [References](#references)
+* [References](#references) -->
 
 ## Introduction
 
