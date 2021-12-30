@@ -2,15 +2,8 @@
 
 <p align="center">
 <figure>
-  <img src="docs/images/model_architecture_simplified.png">
-  <figcaption><i>Simplified model architecture.</i></figcaption>
-</figure>
-</p>
-
-<p align="center">
-<figure>
-  <img src="docs/images/pipeline_architecture.png">
-  <figcaption><i>MLOps pipeline architecture.</i></figcaption>
+  <img src="docs/images/architectures.png">
+  <figcaption><i>ML model and pipeline architectures.</i></figcaption>
 </figure>
 </p>
 
