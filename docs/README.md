@@ -3,7 +3,7 @@
 
 <p align="center">
 <figure>
-  <img src="docs/images/architectures.png">
+  <img src="images/architectures.png">
   <figcaption><i>ML model and pipeline architectures.</i></figcaption>
 </figure>
 </p>
