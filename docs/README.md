@@ -98,15 +98,8 @@ In the end, we got a working model in the form of a neural network based on the 
 
 <p align="center">
 <figure>
-  <img src="images/model_architecture.png">
-  <figcaption><i>BERT-based model architecture.</i></figcaption>
-</figure>
-</p>
-
-<p align="center">
-<figure>
-  <img src="images/metrics.png">
-  <figcaption><i>Model evaluation metrics.</i></figcaption>
+  <img src="images/model_and_results.png">
+  <figcaption><i>BERT-based model architecture and evaluation results.</i></figcaption>
 </figure>
 </p>
 
@@ -133,6 +126,14 @@ The pipeline is meant to spread across three machines. Machine 1 hosts a Flask s
 ### Retraining
 
 Retraining occurs whenever a new batch of tweets has been collected. The new data are split into a train set and test set. The model is retrained on the train set. Before deploying the newly retrained model, it is compared against the currently deployed model on the test set. The better model of the two is then deployed for live inference with the web application. In this way, we simulate the following scenario: the production model is continuously redeployed to ensure that it reflects the environment it lives in which is constantly changing due to, e.g., data drift or concept drift. Therefore, the model "grows" as the environment changes, resulting in a continuous lifecycle.
+
+<p align="center">
+<figure>
+  <img src="images/mlflow.png">
+  <figcaption><i>MLflow model monitoring.</i></figcaption>
+</figure>
+</p>
+
 
 ## References
 
